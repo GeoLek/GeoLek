@@ -2,7 +2,7 @@ name: Update Timeline Image
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Daily at midnight UTC
+    - cron: '0 0 * * *'  # Run daily at midnight UTC
   workflow_dispatch:  # Allows manual trigger
 
 jobs:
@@ -36,5 +36,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add --force timeline.png
-          git commit -m "Update timeline image" || echo "No changes to commit"
+          git commit -m "Update timeline image [skip ci]" || echo "No changes to commit"
           git push origin gh-pages --force
