@@ -30,23 +30,13 @@ jobs:
       - name: Generate Timeline Image
         run: python timeline.py
 
-      # Debugging: Verify if the file was generated
-      - name: Debugging - List Files After Script
+      # Step 5: Stash or Reset Changes in Main
+      - name: Reset Changes in Main
         run: |
-          echo "Checking current directory after running timeline.py:"
-          ls -la
-          echo "Checking timeline.png file info:"
-          file timeline.png || echo "timeline.png not found"
+          git reset --hard
+          git clean -fd
 
-      # Debugging: Check for file differences
-      - name: Debugging - Check Git Status
-        run: |
-          echo "Git status before committing changes:"
-          git status
-          echo "Checking if timeline.png has changes:"
-          git diff --stat timeline.png || echo "No differences detected"
-
-      # Step 5: Commit and Push Timeline
+      # Step 6: Switch to gh-pages and Force Overwrite
       - name: Commit and Push Timeline
         run: |
           git config --global user.name "github-actions[bot]"
@@ -56,7 +46,7 @@ jobs:
           git fetch origin gh-pages:gh-pages || git checkout --orphan gh-pages
           git checkout gh-pages
 
-          # Copy the updated timeline.png from main to gh-pages
+          # Overwrite timeline.png in gh-pages with the generated file
           cp ../timeline.png timeline.png
 
           # Force add and commit the new timeline.png
