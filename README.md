@@ -1,4 +1,4 @@
-![Daily Timeline](https://github.com/GeoLek/GeoLek/blob/gh-pages/timeline.png)
+A branch for visualization purposes of the daily timeline.
 <!--
 **GeoLek/GeoLek** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
