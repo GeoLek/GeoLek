@@ -2,8 +2,7 @@ name: Update Timeline Image
 
 on:
   schedule:
-      - cron: '*/15 * * * *'  # Runs every 15 minutes for testing
-    #- cron: '0 0 * * *'  # Run daily at midnight UTC
+    - cron: '0 0 * * *'  # Run daily at midnight UTC
   workflow_dispatch:  # Allows manual trigger
 
 jobs:
