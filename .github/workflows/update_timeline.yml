@@ -28,26 +28,31 @@ jobs:
 
       # Step 4: Run the Python script to generate the image
       - name: Generate Timeline Image
-        run: python timeline.py
-
-      # Step 5: Stash or Reset Changes in Main
-      - name: Reset Changes in Main
         run: |
-          git reset --hard
-          git clean -fd
+          python timeline.py
+          echo "Generated timeline.png in $(pwd)"
+          ls -la
 
-      # Step 6: Switch to gh-pages and Force Overwrite
+      # Step 5: Save timeline.png for later steps
+      - name: Save Generated File
+        run: mv timeline.png $HOME/timeline.png
+
+      # Step 6: Switch to gh-pages and overwrite file
       - name: Commit and Push Timeline
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Fetch the gh-pages branch or create it if it doesn't exist
+          # Clean the working directory to avoid conflicts
+          git reset --hard
+          git clean -fd
+
+          # Fetch and checkout the gh-pages branch
           git fetch origin gh-pages:gh-pages || git checkout --orphan gh-pages
           git checkout gh-pages
 
-          # Overwrite timeline.png in gh-pages with the generated file
-          cp ../timeline.png timeline.png
+          # Move the saved timeline.png into the current directory
+          mv $HOME/timeline.png timeline.png
 
           # Force add and commit the new timeline.png
           git add --force timeline.png
