@@ -35,10 +35,21 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Stash any uncommitted changes in case the branch switch is needed
+          git stash
+
+          # Fetch and checkout gh-pages branch
           git fetch origin gh-pages:gh-pages || git checkout --orphan gh-pages
           git checkout gh-pages
-          git reset --soft origin/gh-pages
+
+          # Apply the stashed changes (if any)
+          git stash pop || echo "Nothing to apply"
+
+          # Add and commit the updated timeline.png
           git add --force timeline.png
           git commit -m "Update timeline image [skip ci]" || echo "No changes to commit"
+
+          # Push changes to gh-pages
           git push origin gh-pages --force
        
