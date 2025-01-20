@@ -31,10 +31,10 @@ jobs:
         run: python timeline.py
 
       # Step 5: Debugging steps
-      - name: Debugging: List Current Files
+      - name: Debugging - List Current Files
         run: ls -la
 
-      - name: Debugging: Check File Contents
+      - name: Debugging - Check File Contents
         run: file timeline.png || echo "timeline.png not found"
 
       # Step 6: Commit and Push the updated image
