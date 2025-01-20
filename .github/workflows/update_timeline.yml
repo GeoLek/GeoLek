@@ -30,14 +30,11 @@ jobs:
       - name: Generate Timeline Image
         run: python timeline.py
 
-      # Step 5: Debugging steps
-      - name: Debugging - List Current Files
+      # Step 5: Debugging - Verify timeline.png
+      - name: Debugging - Check Generated Files
         run: ls -la
 
-      - name: Debugging - Check File Contents
-        run: file timeline.png || echo "timeline.png not found"
-
-      # Step 6: Commit and Push the updated image
+      # Step 6: Commit and Push Timeline
       - name: Commit and Push Timeline
         run: |
           git config --global user.name "github-actions[bot]"
@@ -51,8 +48,8 @@ jobs:
           git fetch origin gh-pages:gh-pages || git checkout --orphan gh-pages
           git checkout gh-pages
 
-          # Copy the new timeline.png from the default working directory
-          cp ../timeline.png timeline.png
+          # Move the generated timeline.png to the gh-pages branch
+          mv timeline.png timeline.png
 
           # Force add and commit the new timeline.png
           git add --force timeline.png
