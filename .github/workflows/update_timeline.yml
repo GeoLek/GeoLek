@@ -43,19 +43,14 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Stash any uncommitted changes in case the branch switch is needed
-          git stash
-
-          # Fetch and checkout gh-pages branch
+          # Fetch the gh-pages branch or create it if it doesn't exist
           git fetch origin gh-pages:gh-pages || git checkout --orphan gh-pages
           git checkout gh-pages
 
-          # Apply the stashed changes (if any)
-          git stash pop || echo "Nothing to apply"
+          # Force overwrite timeline.png with the new version
+          cp ../timeline.png timeline.png
 
-          # Force add the timeline.png file to ensure it's committed
+          # Commit and push the changes
           git add --force timeline.png
           git commit -m "Update timeline image [skip ci]" || echo "No changes to commit"
-
-          # Push changes to gh-pages
           git push origin gh-pages --force
