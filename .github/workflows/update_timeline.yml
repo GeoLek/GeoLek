@@ -30,7 +30,14 @@ jobs:
       - name: Generate Timeline Image
         run: python timeline.py
 
-      # Step 5: Commit and Push the updated image
+      # Step 5: Debugging steps
+      - name: Debugging: List Current Files
+        run: ls -la
+
+      - name: Debugging: Check File Contents
+        run: file timeline.png || echo "timeline.png not found"
+
+      # Step 6: Commit and Push the updated image
       - name: Commit and Push Timeline
         run: |
           git config --global user.name "github-actions[bot]"
@@ -52,5 +59,3 @@ jobs:
 
           # Push changes to gh-pages
           git push origin gh-pages --force
-      
-       
