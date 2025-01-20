@@ -52,25 +52,16 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Clean the working directory to avoid conflicts
-          git reset --hard
-          git clean -fd
-
           # Fetch the gh-pages branch or create it if it doesn't exist
           git fetch origin gh-pages:gh-pages || git checkout --orphan gh-pages
           git checkout gh-pages
 
-          # Debugging: Verify branch contents
-          echo "Files in gh-pages branch before adding new changes:"
-          ls -la
+          # Copy the updated timeline.png from main to gh-pages
+          cp ../timeline.png timeline.png
 
           # Force add and commit the new timeline.png
           git add --force timeline.png
           git commit -m "Update timeline image [skip ci]" || echo "No changes to commit"
-
-          # Debugging: Check Git Status After Commit
-          echo "Git status after committing changes:"
-          git status
 
           # Push changes to gh-pages
           git push origin gh-pages --force
