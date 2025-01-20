@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import datetime
 import calendar
+import os
 
 # Simulate a future date (e.g., January 21, 2025)
 simulated_date = datetime.datetime(2025, 1, 21)
@@ -67,6 +68,10 @@ ax.set_ylim(0, 1.2)
 ax.set_xticks([])
 ax.set_yticks([])
 ax.axis("off")
+
+# Delete existing timeline.png (if it exists)
+if os.path.exists("timeline.png"):
+    os.remove("timeline.png")
 
 # Show plot
 plt.tight_layout()
