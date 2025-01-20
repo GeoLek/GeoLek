@@ -2,10 +2,18 @@ import matplotlib.pyplot as plt
 import datetime
 import calendar
 
-# Get the current date, month, and day
-current_date = datetime.datetime.now()
+# Simulate a future date (e.g., January 21, 2025)
+simulated_date = datetime.datetime(2025, 1, 21)
+current_date = simulated_date  # Override the current date with the simulated date
 current_month = current_date.strftime("%b")
 current_day = current_date.day
+
+
+
+# Get the current date, month, and day
+#current_date = datetime.datetime.now()
+#current_month = current_date.strftime("%b")
+#current_day = current_date.day
 
 # Define months and calculate progress
 months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
