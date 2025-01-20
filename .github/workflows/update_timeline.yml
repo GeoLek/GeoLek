@@ -46,10 +46,11 @@ jobs:
           # Apply the stashed changes (if any)
           git stash pop || echo "Nothing to apply"
 
-          # Add and commit the updated timeline.png
+          # Force add the timeline.png file to ensure it's committed
           git add --force timeline.png
           git commit -m "Update timeline image [skip ci]" || echo "No changes to commit"
 
           # Push changes to gh-pages
           git push origin gh-pages --force
+      
        
