@@ -41,7 +41,7 @@ for i, month in enumerate(months):
     label = f"{month} ({current_day}/{month})" if i == current_month_index else month
     ax.text(i, -0.08, label, ha="center", va="top", fontsize=10, color="#FFFFFF", fontweight="medium")
 
-# Add "You are here" annotation above the bars with enhanced style
+# Add "You are here" annotation above the bars on the left side
 ax.annotate("You are here ★",
             xy=(current_month_index, 1.05),
             xytext=(current_month_index, 1.2),
@@ -50,6 +50,10 @@ ax.annotate("You are here ★",
             color="#FFD700",
             weight="bold",
             arrowprops=dict(facecolor='#FFD700', arrowstyle='->'))
+
+# Display "Happy New Month 😊" on the first day of the month **at the bottom right**
+if current_day == 1:
+    ax.text(11.5, -0.35, "Happy New Month 😊", fontsize=11, color="#FFD700", ha="right", fontweight="bold")
 
 # Add legend below the histogram
 ax.text(2, -0.25, "■ Experience", fontsize=10, color="#FFD700", va="center", ha="center", fontweight="bold")
