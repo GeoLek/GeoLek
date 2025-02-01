@@ -6,18 +6,12 @@ import os
 # Get the current date, month, and day
 current_date = datetime.datetime.now()
 current_month = current_date.strftime("%b")
+current_month_index = current_date.month - 1  # Convert to zero-based index
 current_day = current_date.day
 
 # Define months and calculate progress
 months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 days_in_months = [calendar.monthrange(current_date.year, i + 1)[1] for i in range(12)]
-progress = []
-
-for i, month in enumerate(months):
-    if month == current_month:
-        progress.append(round(current_day / days_in_months[i], 2))  # Strict calculation with two decimal places
-    else:
-        progress.append(0)
 
 # Define a dark theme
 plt.style.use("dark_background")
@@ -28,22 +22,29 @@ ax.set_facecolor("#222222")
 
 # Plot each month as a bar in a compact histogram
 for i, month in enumerate(months):
-    # Draw the base bar
     days = days_in_months[i]
     for day in range(days):
-        fill_color = "#FFD700" if month == current_month and day < current_day else "#555555"
+        # Experience: Past months fully filled with gold
+        if i < current_month_index:
+            fill_color = "#FFD700"
+        # Current month: Partial gold fill up to today's date
+        elif i == current_month_index and day < current_day:
+            fill_color = "#FFD700"
+        # Future months: Gray
+        else:
+            fill_color = "#555555"
+
         ax.bar(i, 1 / days, bottom=day / days, color=fill_color, edgecolor="none", width=0.4)
 
 # Add month labels below each bar with day
 for i, month in enumerate(months):
-    label = f"{month} ({current_day}/{month})" if month == current_month else month
+    label = f"{month} ({current_day}/{month})" if i == current_month_index else month
     ax.text(i, -0.08, label, ha="center", va="top", fontsize=10, color="#FFFFFF", fontweight="medium")
 
 # Add "You are here" annotation above the bars with enhanced style
-current_index = months.index(current_month)
 ax.annotate("You are here ★",
-            xy=(current_index, 1.05),
-            xytext=(current_index, 1.2),
+            xy=(current_month_index, 1.05),
+            xytext=(current_month_index, 1.2),
             fontsize=12,
             ha="center",
             color="#FFD700",
