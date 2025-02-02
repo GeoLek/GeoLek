@@ -8,6 +8,8 @@ current_date = datetime.datetime.now()
 current_month = current_date.strftime("%b")
 current_month_index = current_date.month - 1  # Convert to zero-based index
 current_day = current_date.day
+current_day_of_year = current_date.timetuple().tm_yday  # Get day of the year
+total_days_in_year = 366 if calendar.isleap(current_date.year) else 365  # Account for leap years
 
 # Define months and calculate progress
 months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -55,9 +57,13 @@ ax.annotate("You are here ★",
 if current_day == 1:
     ax.text(11.5, -0.35, "Happy New Month 😊", fontsize=11, color="#FFD700", ha="right", fontweight="bold")
 
+# Display "Page X/365" under July in **electric blue**
+ax.text(6.5, -0.30, f"Page {current_day_of_year}/{total_days_in_year}",
+        fontsize=11, color="#FFD700", ha="center", fontweight="bold")
+
 # Add legend below the histogram
-ax.text(2, -0.25, "■ Experience", fontsize=10, color="#FFD700", va="center", ha="center", fontweight="bold")
-ax.text(6, -0.25, "■ Opportunity", fontsize=10, color="#AAAAAA", va="center", ha="center", fontweight="bold")
+ax.text(1, -0.25, "■ Experience", fontsize=10, color="#FFD700", va="center", ha="center", fontweight="bold")
+ax.text(3, -0.25, "■ Opportunity", fontsize=10, color="#AAAAAA", va="center", ha="center", fontweight="bold")
 
 # Adjust plot settings
 ax.set_xlim(-0.5, 11.5)
