@@ -53,9 +53,15 @@ ax.annotate("You are here ★",
             weight="bold",
             arrowprops=dict(facecolor='#FFD700', arrowstyle='->'))
 
-# Display "Happy New Month 😊" on the first day of the month **at the bottom right**
+# Display "Happy New Month 😊" on the first day of the month (bottom right)
 if current_day == 1:
-    ax.text(11.5, -0.35, "Happy New Month 😊", fontsize=11, color="#FFD700", ha="right", fontweight="bold")
+    ax.text(11.5, -0.35, "Happy New Month 😊", fontsize=11, color="#FFD700",
+            ha="right", fontweight="bold")
+
+# Display "Happy New Year 🎆" only on January 1st
+if current_date.month == 1 and current_day == 1:
+    ax.text(11.5, -0.46, "Happy New Year 🎆", fontsize=11, color="#FFD700",
+            ha="right", fontweight="bold")
 
 # Display "Page X/365" under July in **electric blue**
 ax.text(6.5, -0.30, f"Page {current_day_of_year}/{total_days_in_year}",
