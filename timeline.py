@@ -105,7 +105,7 @@ if current_date.month == 1 and current_day == 1:
     ax.text(
         11.5,
         -0.46,
-        "Happy New Year 🎆",
+        "✨ Happy New Year ✨",
         fontsize=11,
         color="#FFD700",
         ha="right",
