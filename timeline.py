@@ -6,8 +6,7 @@ import os
 # ============================
 # TIME: STRICTLY UTC
 # ============================
-current_date = datetime.datetime.utcnow()
-
+current_date = datetime.datetime.now(datetime.timezone.utc)
 current_month = current_date.strftime("%b")
 current_month_index = current_date.month - 1  # zero-based
 current_day = current_date.day
