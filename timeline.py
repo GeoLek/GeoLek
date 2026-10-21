@@ -7,6 +7,7 @@ import os
 # TIME: STRICTLY UTC
 # ============================
 current_date = datetime.datetime.now(datetime.timezone.utc)
+
 current_month = current_date.strftime("%b")
 current_month_index = current_date.month - 1  # zero-based
 current_day = current_date.day
@@ -99,7 +100,6 @@ if current_day == 1:
         fontweight="bold"
     )
 
-# Happy New Year ONLY on Jan 1
 if current_date.month == 1 and current_day == 1:
     ax.text(
         11.5,
@@ -109,6 +109,22 @@ if current_date.month == 1 and current_day == 1:
         color="#FFD700",
         ha="right",
         fontweight="bold"
+    )
+
+# ============================
+# SPECIAL DATE: OCTOBER 23
+# Dove in the upper-right corner
+# ============================
+if current_date.month == 10 and current_day == 23:
+    ax.text(
+        0.985,
+        0.965,
+        "🕊️",
+        transform=ax.transAxes,
+        ha="right",
+        va="top",
+        fontsize=18,
+        color="#FFFFFF"
     )
 
 # ============================
@@ -127,11 +143,27 @@ ax.text(
 # ============================
 # LEGEND
 # ============================
-ax.text(1, -0.25, "■ Experience", fontsize=10, color="#FFD700",
-        va="center", ha="center", fontweight="bold")
+ax.text(
+    1,
+    -0.25,
+    "■ Experience",
+    fontsize=10,
+    color="#FFD700",
+    va="center",
+    ha="center",
+    fontweight="bold"
+)
 
-ax.text(3, -0.25, "■ Opportunity", fontsize=10, color="#AAAAAA",
-        va="center", ha="center", fontweight="bold")
+ax.text(
+    3,
+    -0.25,
+    "■ Opportunity",
+    fontsize=10,
+    color="#AAAAAA",
+    va="center",
+    ha="center",
+    fontweight="bold"
+)
 
 # ============================
 # FINAL TOUCHES
