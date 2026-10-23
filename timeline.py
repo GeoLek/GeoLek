@@ -119,7 +119,7 @@ if current_date.month == 10 and current_day == 23:
     ax.text(
         0.985,
         0.965,
-        "🕊️",
+        "🕊",
         transform=ax.transAxes,
         ha="right",
         va="top",
